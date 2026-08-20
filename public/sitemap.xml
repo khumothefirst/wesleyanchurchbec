@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: set BASE_URL once the project has a name or custom domain -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>/</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/beliefs</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/structure</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/sermons</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/mthatha-central</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/ngangelizwe</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/butterworth</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/king-williams-town</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/east-london</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/queenstown</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/mount-frere</loc><changefreq>monthly</changefreq></url>
+  <url><loc>/circuits/lusikisiki</loc><changefreq>monthly</changefreq></url>
+</urlset>

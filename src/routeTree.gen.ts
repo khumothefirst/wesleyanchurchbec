@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BeliefsRouteImport } from './routes/beliefs'
+import { Route as SermonsRouteImport } from './routes/sermons'
+import { Route as StructureRouteImport } from './routes/structure'
+import { Route as CircuitsIndexRouteImport } from './routes/circuits.index'
+import { Route as CircuitsSlugRouteImport } from './routes/circuits.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BeliefsRoute = BeliefsRouteImport.update({
+  id: '/beliefs',
+  path: '/beliefs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SermonsRoute = SermonsRouteImport.update({
+  id: '/sermons',
+  path: '/sermons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StructureRoute = StructureRouteImport.update({
+  id: '/structure',
+  path: '/structure',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CircuitsIndexRoute = CircuitsIndexRouteImport.update({
+  id: '/circuits/',
+  path: '/circuits/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CircuitsSlugRoute = CircuitsSlugRouteImport.update({
+  id: '/circuits/$slug',
+  path: '/circuits/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/beliefs': typeof BeliefsRoute
+  '/sermons': typeof SermonsRoute
+  '/structure': typeof StructureRoute
+  '/circuits/$slug': typeof CircuitsSlugRoute
+  '/circuits/': typeof CircuitsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/beliefs': typeof BeliefsRoute
+  '/sermons': typeof SermonsRoute
+  '/structure': typeof StructureRoute
+  '/circuits/$slug': typeof CircuitsSlugRoute
+  '/circuits': typeof CircuitsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/beliefs': typeof BeliefsRoute
+  '/sermons': typeof SermonsRoute
+  '/structure': typeof StructureRoute
+  '/circuits/$slug': typeof CircuitsSlugRoute
+  '/circuits/': typeof CircuitsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/beliefs'
+    | '/sermons'
+    | '/structure'
+    | '/circuits/$slug'
+    | '/circuits/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/beliefs'
+    | '/sermons'
+    | '/structure'
+    | '/circuits/$slug'
+    | '/circuits'
+  id:
+    | '__root__'
+    | '/'
+    | '/beliefs'
+    | '/sermons'
+    | '/structure'
+    | '/circuits/$slug'
+    | '/circuits/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BeliefsRoute: typeof BeliefsRoute
+  SermonsRoute: typeof SermonsRoute
+  StructureRoute: typeof StructureRoute
+  CircuitsSlugRoute: typeof CircuitsSlugRoute
+  CircuitsIndexRoute: typeof CircuitsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/beliefs': {
+      id: '/beliefs'
+      path: '/beliefs'
+      fullPath: '/beliefs'
+      preLoaderRoute: typeof BeliefsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sermons': {
+      id: '/sermons'
+      path: '/sermons'
+      fullPath: '/sermons'
+      preLoaderRoute: typeof SermonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/structure': {
+      id: '/structure'
+      path: '/structure'
+      fullPath: '/structure'
+      preLoaderRoute: typeof StructureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/circuits/': {
+      id: '/circuits/'
+      path: '/circuits'
+      fullPath: '/circuits/'
+      preLoaderRoute: typeof CircuitsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/circuits/$slug': {
+      id: '/circuits/$slug'
+      path: '/circuits/$slug'
+      fullPath: '/circuits/$slug'
+      preLoaderRoute: typeof CircuitsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BeliefsRoute: BeliefsRoute,
+  SermonsRoute: SermonsRoute,
+  StructureRoute: StructureRoute,
+  CircuitsSlugRoute: CircuitsSlugRoute,
+  CircuitsIndexRoute: CircuitsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
