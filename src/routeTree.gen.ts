@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BeliefsRouteImport } from './routes/beliefs'
 import { Route as StructureRouteImport } from './routes/structure'
+import { Route as CircuitsIndexRouteImport } from './routes/circuits.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const StructureRoute = StructureRouteImport.update({
   path: '/structure',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CircuitsIndexRoute = CircuitsIndexRouteImport.update({
+  id: '/circuits/',
+  path: '/circuits/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/beliefs': typeof BeliefsRoute
   '/structure': typeof StructureRoute
+  '/circuits/': typeof CircuitsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/beliefs': typeof BeliefsRoute
   '/structure': typeof StructureRoute
+  '/circuits': typeof CircuitsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/beliefs': typeof BeliefsRoute
   '/structure': typeof StructureRoute
+  '/circuits/': typeof CircuitsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/beliefs' | '/structure'
+  fullPaths: '/' | '/beliefs' | '/structure' | '/circuits/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/beliefs' | '/structure'
-  id: '__root__' | '/' | '/beliefs' | '/structure'
+  to: '/' | '/beliefs' | '/structure' | '/circuits'
+  id: '__root__' | '/' | '/beliefs' | '/structure' | '/circuits/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BeliefsRoute: typeof BeliefsRoute
   StructureRoute: typeof StructureRoute
+  CircuitsIndexRoute: typeof CircuitsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StructureRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/circuits/': {
+      id: '/circuits/'
+      path: '/circuits'
+      fullPath: '/circuits/'
+      preLoaderRoute: typeof CircuitsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BeliefsRoute: BeliefsRoute,
   StructureRoute: StructureRoute,
+  CircuitsIndexRoute: CircuitsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
