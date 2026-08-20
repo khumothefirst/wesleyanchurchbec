@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BeliefsRouteImport } from './routes/beliefs'
+import { Route as StructureRouteImport } from './routes/structure'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const BeliefsRoute = BeliefsRouteImport.update({
   path: '/beliefs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StructureRoute = StructureRouteImport.update({
+  id: '/structure',
+  path: '/structure',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/beliefs': typeof BeliefsRoute
+  '/structure': typeof StructureRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/beliefs': typeof BeliefsRoute
+  '/structure': typeof StructureRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/beliefs': typeof BeliefsRoute
+  '/structure': typeof StructureRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/beliefs'
+  fullPaths: '/' | '/beliefs' | '/structure'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/beliefs'
-  id: '__root__' | '/' | '/beliefs'
+  to: '/' | '/beliefs' | '/structure'
+  id: '__root__' | '/' | '/beliefs' | '/structure'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BeliefsRoute: typeof BeliefsRoute
+  StructureRoute: typeof StructureRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BeliefsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/structure': {
+      id: '/structure'
+      path: '/structure'
+      fullPath: '/structure'
+      preLoaderRoute: typeof StructureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BeliefsRoute: BeliefsRoute,
+  StructureRoute: StructureRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
