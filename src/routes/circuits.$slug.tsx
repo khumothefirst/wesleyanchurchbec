@@ -58,7 +58,7 @@ function CircuitPage() {
             {circuit.name} <em className="text-gold">Circuit</em>
           </>
         }
-        lead={circuit.address ? `Address: ${circuit.address}` : undefined}
+        lead={circuit.address ? `Address: ${circuit.address}` : "Border & Eastern Cape District, seated in Mthatha."}
       >
         <Link
           to="/circuits"
