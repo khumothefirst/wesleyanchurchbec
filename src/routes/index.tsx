@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, SectionHead } from "@/components/site-chrome";
 import { circuits, tiers } from "@/lib/district";
+import bishopPortrait from "@/assets/bishop-madaza.jpg.asset.json";
 
 const TITLE =
   "Wesleyan Church SANC — Border & Eastern Cape District, Mthatha";
