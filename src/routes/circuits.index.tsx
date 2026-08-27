@@ -4,7 +4,7 @@ import { circuits } from "@/lib/district";
 
 const TITLE = "Circuit Roll — Border & Eastern Cape District, Wesleyan Church SANC";
 const DESCRIPTION =
-  "The eight circuits of the Border & Eastern Cape District of the Wesleyan Church SANC, from Mthatha Central to Lusikisiki, gathered under one District Bishop.";
+  "The circuits of the Border & Eastern Cape District of the Wesleyan Church SANC, with superintendents, ministers and circuit stewards, gathered under one District Bishop.";
 
 export const Route = createFileRoute("/circuits/")({
   head: () => ({
