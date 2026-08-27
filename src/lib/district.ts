@@ -5,98 +5,218 @@ export const CHURCH_NAME =
 export const DISTRICT_SEAT = "Mthatha, Eastern Cape";
 export const DISTRICT_BISHOP = "The District Bishop";
 
+export type Person = {
+  name: string;
+  phone?: string;
+};
+
+export type Society = {
+  name: string;
+  steward?: Person;
+};
+
 export type Circuit = {
   slug: string;
-  number: string;
+  index: number;
+  number?: string;
   name: string;
-  seat: string;
-  minister: string;
-  intro: string;
-  focus: string;
+  address?: string;
+  ministers: Person[];
+  stewards: Person[];
+  societies: Society[];
 };
 
 export const circuits: Circuit[] = [
   {
     slug: "mthatha-central",
-    number: "501",
+    index: 1,
+    number: "0101",
     name: "Mthatha Central",
-    seat: "Mthatha",
-    minister: "Circuit Superintendent (to be confirmed)",
-    intro:
-      "Circuit 501 sits at the administrative heart of the district. Seated in Mthatha, its congregations carry the older preaching traditions of the region and anchor much of the district's lay-delegate strength at conference.",
-    focus: "Town-centre worship, township outreach, lay leader formation.",
+    ministers: [{ name: "Rev. C.L. Madaza", phone: "083 683 0728" }],
+    stewards: [],
+    societies: [],
   },
   {
-    slug: "ngangelizwe",
-    number: "502",
-    name: "Ngangelizwe",
-    seat: "Ngangelizwe, Mthatha",
-    minister: "Circuit Minister (to be confirmed)",
-    intro:
-      "Circuit 502 serves the dense residential communities south of Mthatha, with a strong emphasis on youth work and household discipleship.",
-    focus: "Youth ministry, household visitation, midweek class meetings.",
+    slug: "mthatha-south",
+    index: 2,
+    name: "Mthatha South",
+    address: "Ncambele A/A",
+    ministers: [
+      { name: "Rev. V. Balabala", phone: "083 769 0657" },
+      { name: "Rev. T. Mpengesi", phone: "083 429 6527" },
+    ],
+    stewards: [{ name: "Ms V. Gwama", phone: "083 304 4655" }],
+    societies: [
+      { name: "Bongweni", steward: { name: "Ms S. Xhelo", phone: "083 941 2422" } },
+      { name: "Ncise", steward: { name: "Ms T. Manyifolo", phone: "073 403 3488" } },
+      { name: "Qweqwe & Luthuthu", steward: { name: "Ms Madkane", phone: "073 362 3783" } },
+    ],
   },
   {
-    slug: "butterworth",
-    number: "503",
-    name: "Butterworth",
-    seat: "Butterworth (Gcuwa)",
-    minister: "Circuit Superintendent (to be confirmed)",
-    intro:
-      "Circuit 503 gathers Societies across the Gcuwa valley, holding together town congregations and a wide spread of rural preaching places.",
-    focus: "Rural preaching places, catechism, circuit-wide revival services.",
+    slug: "mthatha-west",
+    index: 3,
+    name: "Mthatha West",
+    address: "Ncise A/A",
+    ministers: [{ name: "Rev. N.A. Madaza" }],
+    stewards: [],
+    societies: [],
   },
   {
-    slug: "king-williams-town",
-    number: "504",
-    name: "King William's Town",
-    seat: "Qonce (King William's Town)",
-    minister: "Circuit Minister (to be confirmed)",
-    intro:
-      "Circuit 504 carries the historic Border witness of the district, with congregations rooted in the mission history of the Buffalo basin.",
-    focus: "Border heritage congregations, mission history, pastoral training.",
+    slug: "mputi",
+    index: 4,
+    name: "Mputi",
+    ministers: [{ name: "Rev. Z. Ngcayi" }],
+    stewards: [],
+    societies: [
+      { name: "Makaula", steward: { name: "Ms Kula", phone: "060 389 4258" } },
+      { name: "Jungqe", steward: { name: "Ms Mapotiyela", phone: "069 258 1832" } },
+      { name: "Lwandleni", steward: { name: "Ms W. Gageni", phone: "063 593 9050" } },
+      { name: "Mdeni", steward: { name: "Vacant" } },
+      { name: "Mputi Phezulu", steward: { name: "Vacant" } },
+    ],
   },
   {
-    slug: "east-london",
-    number: "505",
-    name: "East London",
-    seat: "East London (Monti)",
-    minister: "Circuit Superintendent (to be confirmed)",
-    intro:
-      "Circuit 505 is the district's coastal-urban charge, serving city congregations and the surrounding townships with a settled weekly rhythm of worship.",
-    focus: "Urban worship, workplace witness, student and young-adult fellowship.",
+    slug: "majola",
+    index: 5,
+    name: "Majola",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. Gwazela", phone: "078 555 7529" }],
+    stewards: [
+      { name: "Ms Makaula", phone: "073 986 6999" },
+      { name: "Ms T. Nyingwa", phone: "078 843 347" },
+    ],
+    societies: [],
   },
   {
-    slug: "queenstown",
-    number: "506",
-    name: "Queenstown",
-    seat: "Komani (Queenstown)",
-    minister: "Circuit Minister (to be confirmed)",
-    intro:
-      "Circuit 506 reaches the inland plateau of the district, where Societies are widely spaced and lay leadership carries much of the weekly preaching.",
-    focus: "Lay preacher formation, itinerant ministry, holiness conventions.",
+    slug: "ugie",
+    index: 6,
+    name: "Ugie",
+    ministers: [{ name: "Rev. N.A. Madaza" }],
+    stewards: [{ name: "Ms N. Mose" }],
+    societies: [],
   },
   {
-    slug: "mount-frere",
-    number: "507",
-    name: "Mount Frere",
-    seat: "KwaBhaca (Mount Frere)",
-    minister: "Circuit Superintendent (to be confirmed)",
-    intro:
-      "Circuit 507 serves the highland communities of the district's interior, with congregations gathered around long-standing rural Societies.",
-    focus: "Rural discipleship, agricultural community care, Sunday schools.",
+    slug: "mqanduli",
+    index: 7,
+    name: "Mqanduli",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. Fadana" }],
+    stewards: [],
+    societies: [],
   },
   {
-    slug: "lusikisiki",
-    number: "508",
-    name: "Lusikisiki",
-    seat: "Lusikisiki",
-    minister: "Circuit Minister (to be confirmed)",
-    intro:
-      "Circuit 508 is the district's Wild Coast charge, holding a network of coastal and inland Societies under one pastoral oversight.",
-    focus: "Coastal outreach, evangelism campaigns, women's and men's fellowships.",
+    slug: "libode",
+    index: 8,
+    number: "0108",
+    name: "Libode",
+    address: "Masameni A/A, Libode 5160",
+    ministers: [{ name: "Rev. C.L. Madaza" }],
+    stewards: [{ name: "Ms N. Tiya", phone: "078 168 3791" }],
+    societies: [],
+  },
+  {
+    slug: "qumbu-central",
+    index: 9,
+    number: "0105",
+    name: "Qumbu Central",
+    address: "Balasi A/A, Qumbu",
+    ministers: [{ name: "Rev. K. Mlandu", phone: "060 357 1857" }],
+    stewards: [{ name: "Mrs N. Masiza" }],
+    societies: [
+      { name: "Balasi", steward: { name: "Mrs N. Gwayi", phone: "081 052 4462" } },
+      { name: "Luqolweni" },
+    ],
+  },
+  {
+    slug: "tina",
+    index: 10,
+    name: "Tina",
+    address: "Gqwesa A/A",
+    ministers: [{ name: "Rev. N.P. Bulo" }],
+    stewards: [{ name: "Ms N. Ntsalu", phone: "082 660 9254" }],
+    societies: [
+      { name: "Mjikelweni", steward: { name: "Mr S. Skele", phone: "072 813 0574" } },
+    ],
+  },
+  {
+    slug: "matatielle",
+    index: 11,
+    name: "Matatielle",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. Mpela" }],
+    stewards: [],
+    societies: [],
+  },
+  {
+    slug: "butterworth-1",
+    index: 12,
+    number: "0112",
+    name: "Butterworth 1",
+    address: "No. 1179 Zagwityi P.S., Butterworth",
+    ministers: [
+      { name: "Rev. C.L. Madaza" },
+      { name: "Rev. N.L. Madaza", phone: "072 808 8998" },
+    ],
+    stewards: [{ name: "Ms N. Gongxeka", phone: "078 450 0865" }],
+    societies: [
+      { name: "Zagwityi", steward: { name: "Mr Langeni", phone: "078 545 0994" } },
+    ],
+  },
+  {
+    slug: "butterworth-2",
+    index: 13,
+    name: "Butterworth 2",
+    address: "Thoboshane A/A, Butterworth",
+    ministers: [
+      { name: "Rev. Hintsho", phone: "073 835 3923" },
+      { name: "Rev. N. Mayosi", phone: "072 209 0705" },
+    ],
+    stewards: [{ name: "Ms N. Tswela", phone: "081 369 9176" }],
+    societies: [],
+  },
+  {
+    slug: "newlands",
+    index: 14,
+    name: "Newlands",
+    ministers: [{ name: "Rev. M. Mpingololo" }],
+    stewards: [],
+    societies: [],
+  },
+  {
+    slug: "ncera",
+    index: 15,
+    name: "Ncera",
+    address: "Ncera Village, Emaqgazeni",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. Mati" }],
+    stewards: [{ name: "Ms Fumba", phone: "078 173 0550" }],
+    societies: [],
+  },
+  {
+    slug: "rustenburg",
+    index: 16,
+    name: "Rustenburg",
+    address: "House 7485 Extra 4, Platinum Village, Rustenburg 0300",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. Dzingwe", phone: "083 281 8969" }],
+    stewards: [{ name: "Mr Mavumbengwe", phone: "073 007 696" }],
+    societies: [],
+  },
+  {
+    slug: "tiberia",
+    index: 17,
+    name: "Tiberia",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. B. Gqoboza" }],
+    stewards: [],
+    societies: [],
+  },
+  {
+    slug: "burning-bush",
+    index: 18,
+    name: "Burning Bush",
+    address: "2902 Freedom Park Phase 2, Rustenburg 0300",
+    ministers: [{ name: "Rev. C.L. Madaza" }, { name: "Rev. Silimela", phone: "078 116 3366" }],
+    stewards: [{ name: "Ms N. Binca", phone: "073 103 6584" }],
+    societies: [],
   },
 ];
+
+export const CIRCUIT_COUNT = circuits.length;
 
 export const tiers = [
   {

@@ -75,7 +75,7 @@ export function SiteFooter() {
             South Africa
           </p>
           <p className="mt-4 text-sm opacity-85">
-            Eight circuits · One district · One Discipline
+            Eighteen circuits · One district · One Discipline
           </p>
         </div>
       </div>

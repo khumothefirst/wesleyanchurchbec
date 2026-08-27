@@ -5,7 +5,7 @@ import { circuits, tiers } from "@/lib/district";
 const TITLE =
   "Wesleyan Church SANC — Border & Eastern Cape District, Mthatha";
 const DESCRIPTION =
-  "The Wesleyan Church South African National Conference, Border & Eastern Cape District, seated in Mthatha — eight circuits, one discipline, walking the Wesleyan–Arminian way.";
+  "The Wesleyan Church South African National Conference, Border & Eastern Cape District, seated in Mthatha — eighteen circuits, one discipline, walking the Wesleyan–Arminian way.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -127,8 +127,8 @@ function Index() {
       <section className="mx-auto max-w-6xl px-5 py-20 md:py-28">
         <SectionHead
           eyebrow="The district roll"
-          title="Eight circuits, one district, seated in Mthatha."
-          lead="From Mthatha Central to Lusikisiki, each circuit is served by its own superintendent or minister and carries its own character."
+          title={`${circuits.length} circuits, one district, seated in Mthatha.`}
+          lead="From Mthatha Central to Burning Bush, each circuit is served by its own superintendent or minister and carries its own character."
         />
         <ul className="mt-12 grid gap-4 md:grid-cols-2">
           {circuits.map((c) => (
@@ -139,7 +139,7 @@ function Index() {
                 className="flex items-baseline justify-between gap-4 border border-border bg-card px-5 py-4 transition-colors hover:border-primary"
               >
                 <span>
-                  <span className="label-caps text-muted-foreground">{c.number}</span>
+                  <span className="label-caps text-muted-foreground">{c.index}</span>
                   <span className="ml-3 font-display text-xl">{c.name}</span>
                 </span>
                 <span className="label-caps text-primary">View →</span>

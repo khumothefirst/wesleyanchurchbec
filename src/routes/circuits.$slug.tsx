@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PageHero } from "@/components/site-chrome";
-import { circuits } from "@/lib/district";
+import { circuits, type Person } from "@/lib/district";
 
 export const Route = createFileRoute("/circuits/$slug")({
   loader: ({ params }) => {
@@ -15,13 +15,16 @@ export const Route = createFileRoute("/circuits/$slug")({
       };
     }
     const { circuit } = loaderData;
-    const title = `Circuit ${circuit.number} · ${circuit.name} — Border & Eastern Cape District`;
+    const title = `${circuit.name} Circuit — Border & Eastern Cape District`;
+    const description = `Circuit ${circuit.index}${circuit.number ? ` (${circuit.number})` : ""} — ${circuit.name}: superintendents, ministers, circuit stewards and societies in the Border & Eastern Cape District of the Wesleyan Church SANC.`;
     return {
       meta: [
         { title },
-        { name: "description", content: circuit.intro },
+        { name: "description", content: description },
         { property: "og:title", content: title },
-        { property: "og:description", content: circuit.intro },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary" },
         { property: "og:url", content: `/circuits/${params.slug}` },
       ],
       links: [{ rel: "canonical", href: `/circuits/${params.slug}` }],
@@ -30,19 +33,32 @@ export const Route = createFileRoute("/circuits/$slug")({
   component: CircuitPage,
 });
 
+function PersonLine({ person }: { person: Person }) {
+  return (
+    <li className="flex flex-wrap items-baseline gap-x-3">
+      <span className="text-lg">{person.name}</span>
+      {person.phone ? (
+        <a href={`tel:${person.phone.replace(/\s/g, "")}`} className="text-sm text-primary hover:underline">
+          {person.phone}
+        </a>
+      ) : null}
+    </li>
+  );
+}
+
 function CircuitPage() {
   const { circuit } = Route.useLoaderData();
 
   return (
     <>
       <PageHero
-        eyebrow={`Circuit ${circuit.number} · District roll`}
+        eyebrow={`Circuit ${circuit.index}${circuit.number ? ` · ${circuit.number}` : ""} · District roll`}
         title={
           <>
-            {circuit.name} <em className="text-gold">{circuit.minister.split(" (")[0]}</em>
+            {circuit.name} <em className="text-gold">Circuit</em>
           </>
         }
-        lead={circuit.intro}
+        lead={circuit.address ? `Address: ${circuit.address}` : "Border & Eastern Cape District, seated in Mthatha."}
       >
         <Link
           to="/circuits"
@@ -56,26 +72,61 @@ function CircuitPage() {
         <dl className="grid gap-6 border border-border bg-parchment p-6 md:grid-cols-3 md:p-8">
           <div>
             <dt className="label-caps text-primary">Circuit no.</dt>
-            <dd className="mt-2 font-display text-3xl">{circuit.number}</dd>
+            <dd className="mt-2 font-display text-3xl">{circuit.number ?? circuit.index}</dd>
           </div>
           <div>
-            <dt className="label-caps text-primary">Seat</dt>
-            <dd className="mt-2 font-display text-3xl">{circuit.seat}</dd>
+            <dt className="label-caps text-primary">Address</dt>
+            <dd className="mt-2 text-lg">{circuit.address ?? "To be confirmed"}</dd>
           </div>
           <div>
-            <dt className="label-caps text-primary">Oversight</dt>
-            <dd className="mt-2 text-lg">{circuit.minister}</dd>
+            <dt className="label-caps text-primary">Societies</dt>
+            <dd className="mt-2 font-display text-3xl">{circuit.societies.length || "—"}</dd>
           </div>
         </dl>
 
-        <div className="mt-16 max-w-3xl">
-          <p className="label-caps text-primary">Ministry focus</p>
-          <h2 className="mt-4 text-3xl md:text-4xl">{circuit.focus}</h2>
-          <p className="mt-6 text-muted-foreground">
-            {circuit.name} sits within the wider Border &amp; Eastern Cape District, seated in
-            Mthatha, alongside seven other circuits on the district roll.
-          </p>
+        <div className="mt-16 grid gap-12 md:grid-cols-2">
+          <div>
+            <p className="label-caps text-primary">Superintendent / Minister</p>
+            <ul className="mt-4 space-y-3">
+              {circuit.ministers.length ? (
+                circuit.ministers.map((m) => <PersonLine key={m.name} person={m} />)
+              ) : (
+                <li className="text-muted-foreground">To be confirmed</li>
+              )}
+            </ul>
+          </div>
+          <div>
+            <p className="label-caps text-primary">Circuit steward</p>
+            <ul className="mt-4 space-y-3">
+              {circuit.stewards.length ? (
+                circuit.stewards.map((s) => <PersonLine key={s.name} person={s} />)
+              ) : (
+                <li className="text-muted-foreground">To be confirmed</li>
+              )}
+            </ul>
+          </div>
         </div>
+
+        {circuit.societies.length ? (
+          <div className="mt-16">
+            <p className="label-caps text-primary">Societies &amp; society stewards</p>
+            <div className="mt-4 overflow-hidden border border-border">
+              {circuit.societies.map((s) => (
+                <div
+                  key={s.name}
+                  className="grid gap-2 border-b border-border bg-card px-5 py-4 last:border-b-0 md:grid-cols-2"
+                >
+                  <span className="font-display text-xl">{s.name}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {s.steward
+                      ? `${s.steward.name}${s.steward.phone ? ` · ${s.steward.phone}` : ""}`
+                      : "Steward to be confirmed"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         <div className="mt-16">
           <p className="label-caps text-muted-foreground">Other circuits</p>
@@ -89,7 +140,7 @@ function CircuitPage() {
                     params={{ slug: c.slug }}
                     className="label-caps inline-block border border-border px-4 py-3 transition-colors hover:border-primary hover:text-primary"
                   >
-                    {c.number} · {c.name}
+                    {c.index} · {c.name}
                   </Link>
                 </li>
               ))}
