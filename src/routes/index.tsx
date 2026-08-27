@@ -5,7 +5,7 @@ import { circuits, tiers } from "@/lib/district";
 const TITLE =
   "Wesleyan Church SANC — Border & Eastern Cape District, Mthatha";
 const DESCRIPTION =
-  "The Wesleyan Church South African National Conference, Border & Eastern Cape District, seated in Mthatha — eight circuits, one discipline, walking the Wesleyan–Arminian way.";
+  "The Wesleyan Church South African National Conference, Border & Eastern Cape District, seated in Mthatha — eighteen circuits, one discipline, walking the Wesleyan–Arminian way.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
