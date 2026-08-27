@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, SectionHead } from "@/components/site-chrome";
 import { circuits, tiers } from "@/lib/district";
+import bishopPortrait from "@/assets/bishop-madaza.jpg.asset.json";
 
 const TITLE =
   "Wesleyan Church SANC — Border & Eastern Cape District, Mthatha";
@@ -100,6 +101,43 @@ function Index() {
           </p>
           <footer className="label-caps mt-4 text-muted-foreground">Matthew 22:37–39</footer>
         </blockquote>
+      </section>
+
+      <section className="bg-parchment">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+          <SectionHead
+            eyebrow="The office of the Presiding Bishop"
+            title="Presiding Bishop Rev. C.L. Madaza"
+            lead="The Presiding Bishop gives pastoral and spiritual oversight to the Wesleyan Church South African National Conference — shepherding the Conference, the districts, and every society gathered under its discipline."
+          />
+          <div className="mt-12 grid gap-10 md:grid-cols-[20rem_1fr] md:items-start">
+            <figure className="border border-border bg-card p-3">
+              <img
+                src={bishopPortrait.url}
+                alt="Presiding Bishop Rev. C.L. Madaza in ecclesiastical robes and red stole"
+                className="aspect-[4/5] w-full object-cover"
+                loading="lazy"
+              />
+              <figcaption className="label-caps mt-3 text-center text-muted-foreground">
+                Presiding Bishop Rev. C.L. Madaza
+              </figcaption>
+            </figure>
+            <div className="space-y-6 text-muted-foreground">
+              <p>
+                The Presiding Bishop is the supreme pastoral and administrative officer of the
+                Conference, charged with guarding the doctrine, discipline, and unity of the church.
+                He presides over the Conference sessions, ordains and commissions ministers, and
+                represents the Wesleyan Church South African National Conference across the districts.
+              </p>
+              <p>
+                Under his leadership, the Border & Eastern Cape District — seated in Mthatha —
+                carries the holiness message into eighteen circuits, from Mthatha Central to Burning
+                Bush, uniting Societies, Circuits, and Districts under one Discipline.
+              </p>
+              <p className="label-caps text-primary">Presiding Bishop · Wesleyan Church SANC</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="bg-parchment">
