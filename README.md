@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Wesleyan Border Connect
+
+Copy every page of the company of this website Wesleyanchurchfsb.co.za, but the new website let the name be Wesleyanchurch South African National Conference Border & Eastern Cape and the location is from Mthatha
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://wesleyanchurchbec.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9ef6eeb6-3be7-400d-89cb-a0428be1303a).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
