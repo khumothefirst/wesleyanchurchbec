@@ -7,6 +7,11 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { circuits } from "./src/lib/district";
 
+// Inside Lovable the build targets the managed server runtime (Nitro/Cloudflare).
+// Anywhere else (Netlify, GitHub CI, local `bun run build`) we emit a fully
+// prerendered static site into dist/client so it can be published as plain files.
+const isLovableBuild = Boolean(process.env["LOVABLE_NITRO_PRESET"]);
+
 const staticPages = [
   "/",
   "/index.html",
@@ -18,14 +23,20 @@ const staticPages = [
 ];
 
 export default defineConfig({
-  tanstackStart: {
-    // Every route is static content, so prerender the whole site to HTML.
-    // This lets the build be deployed as plain static files (dist/client).
-    prerender: {
-      enabled: true,
-      crawlLinks: true,
-      filter: ({ path }: { path: string }) => !path.startsWith("/api"),
-    },
-    pages: staticPages.map((path) => ({ path, prerender: { enabled: true } })),
-  },
+  nitro: isLovableBuild ? true : false,
+  tanstackStart: isLovableBuild
+    ? {
+        // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+        // nitro/vite builds from this
+        server: { entry: "server" },
+      }
+    : {
+        // Every route is static content, so prerender the whole site to HTML.
+        prerender: {
+          enabled: true,
+          crawlLinks: true,
+          filter: ({ path }: { path: string }) => !path.startsWith("/api"),
+        },
+        pages: staticPages.map((path) => ({ path, prerender: { enabled: true } })),
+      },
 });
