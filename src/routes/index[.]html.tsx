@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomeContent, HOME_TITLE, HOME_DESCRIPTION } from "@/components/home-content";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/index.html")({
   head: () => ({
     meta: [
       { title: HOME_TITLE },
