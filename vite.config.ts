@@ -18,7 +18,6 @@ const staticPages = [
 ];
 
 export default defineConfig({
-  nitro: false,
   tanstackStart: {
     // Every route is static content, so prerender the whole site to HTML.
     // This lets the build be deployed as plain static files (dist/client).
