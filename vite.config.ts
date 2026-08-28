@@ -5,11 +5,30 @@
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { circuits } from "./src/lib/district";
+
+const staticPages = [
+  "/",
+  "/index.html",
+  "/beliefs",
+  "/structure",
+  "/circuits",
+  "/sermons",
+  ...circuits.map((circuit) => `/circuits/${circuit.slug}`),
+];
 
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Every route is static content, so prerender the whole site to HTML.
+    // This lets the build be deployed as plain static files (dist/client).
+    prerender: {
+      enabled: true,
+      crawlLinks: true,
+      filter: ({ path }: { path: string }) => !path.startsWith("/api"),
+    },
+    pages: staticPages.map((path) => ({ path, prerender: { enabled: true } })),
   },
 });
